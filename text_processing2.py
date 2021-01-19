@@ -29,6 +29,13 @@ def digits_to_words(input_string):
             'three one four one five'
     """
     digit_string = None
+    pocket=[]
+    spkn_word=['zero','one','two','three','four','five','six','seven','eight','nine']
+    for i in input_string:
+        if i.isdigit():
+            pocket.append(spkn_word[int(i)])
+    digit_string=' '.join(pocket)
+    
     return digit_string
 
 
@@ -65,4 +72,14 @@ def to_camel_case(underscore_str):
             "alreadyCamel"
     """
     camelcase_str = None
+    prep=underscore_str.strip('_').split('_')             #양옆 짝떼기랑 안쪽 짝데기 분리
+    if len(prep)==1 and prep==['']:                #이 경우에는 짝데기밖에 없다는 뜻
+        return ''
+    elif len(prep)==1:                            #그 이외에 짝데기가 없다면 이미 낙타형
+        return underscore_str
+    prep=[item for item in prep if item!='']
+    for i in range(len(prep)):
+        prep[i]=prep[i].capitalize()
+    camelcase_str=''.join(prep)
+    camelcase_str=camelcase_str[0].lower()+camelcase_str[1:]          #첫글자는 무조건 소문자
     return camelcase_str
